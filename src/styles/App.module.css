@@ -1,0 +1,236 @@
+.app {
+    background: #F7F3EF; /* Sets the background color of the app to a light beige */
+}
+body{
+    background: #F7F3EF; /* Sets the background color of the app to a light beige */
+
+    margin: auto;
+    font-family: Athelas; /* Defines a new font named Athelas */
+    src: url(../assets/fonts/Athelas-Italic.ttf); /* Specifies the path to the Athelas-Italic.ttf font file */
+}
+a {
+    text-decoration: none;
+}
+@font-face {
+    font-family: Athelas; /* Defines a new font named Athelas */
+    src: url(../assets/fonts/Athelas-Italic.ttf); /* Specifies the path to the Athelas-Italic.ttf font file */
+}
+
+.desktopContainer {
+    min-height: 90vh; /* Ensures the container has at least 90% of the viewport height */
+    width: 100%; /* Sets the width of the container to 100% */
+    position: relative; /* Positions the container relative to its normal position */
+    display: flex; /* Sets the display style to flex to enable a flexible box layout */
+    flex-direction: column; /* Arranges the container's children (flex items) in a column */
+    align-items: center; /* Centers the flex items along the cross axis */
+    justify-content: center; /* Centers the flex items along the main axis */
+}
+
+.desktopContainer .logoDesktop, 
+.desktopContainer .iconEntreCopasDesktop, 
+.desktopContainer .textContainerDesktop {
+    max-width: 100%; /* Ensures the max width of these elements is 100% */
+    position: relative; /* Positions these elements relative to their normal position */
+    margin: 10px 10px 0 10px; /* Sets the margin on all sides, with no margin at the bottom to control separation with the next element's top margin */
+}
+
+.desktopContainer .logoDesktop {
+    margin-top: 5%; /* Sets the top margin of the first element to 5% */
+}
+
+.desktopContainer .iconEntreCopasDesktop {
+    margin-top: 5%; /* Sets the top margin of the second element to 5%, which will add to the bottom margin of the first element */
+}
+
+.desktopContainer .textContainerDesktop {
+    margin-top: 2.5%; /* Same here, sets the top margin to 5%, which will add to the bottom margin of the previous element */
+    text-align: center; /* Centers the text */
+    color: #602131; /* Sets the text color to a dark red */
+    font-size: 1.8rem; /* Sets the font size to 2rem (2x the root element font size) */
+    font-family: 'Athelas', sans-serif; /* Sets the font family to Athelas, with a fallback to sans-serif */
+    font-style: italic; /* Sets the font style to italic */
+    font-weight: 400; /* Sets the font weight to normal */
+    line-height: 1.2; /* Sets the line height to 1.2 times the font size */
+    word-wrap: break-word; /* Allows long words to break and wrap onto the next line */
+}
+
+@media (max-width: 768px) {
+    .desktopContainer .textContainerDesktop {
+        font-size: 1.5rem; /* Reduces the font size to 1.5rem for viewports less than or equal to 768px wide */
+    }
+}
+
+
+
+  .Navbar {
+    background-color: #46ACC2;
+    display: flex;
+    padding: 16px;
+    font-family: sans-serif;
+    color: white;
+  }
+
+  .Navbar__Items {
+    display:flex;
+  }
+
+  .Navbar__Link {
+    padding-right: 8px;
+  }
+
+  .containerMenuHeader {
+    width: 100%;
+    max-height: 100vh;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;  /* Cambiado de absolute a fixed */
+    margin-bottom: 50px;
+    z-index: 9999;  /* Asegurarse de que está en la capa superior */
+
+}
+
+.menuItems {
+    position: absolute;  /* Cambiado de absolute a fixed */
+
+    width: 60%;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #F7F3EF;
+    box-shadow: 0px 6px 8px rgba(83.94, 9.09, 9.09, 0.18);
+    border-radius: 35px;
+    border: 1px #C1A1A7 solid;
+    padding: 0 15px;
+    -webkit-border-radius: 35px;
+    -moz-border-radius: 35px;
+    -ms-border-radius: 35px;
+    -o-border-radius: 35px;
+}
+
+.menuItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border: none;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+}
+.menuItem:hover {
+    /* Optional: add hover styles for better user feedback */
+    opacity: 0.9;
+}
+
+.menuItem:focus {
+    /* Optional: adjust focus styles if the default is not suitable */
+    outline: none;
+}
+
+.menuItemText {
+    color: #C1A1A7;
+    font-size: 13px;
+    font-family: Avenir, sans-serif;
+    font-weight: 400;
+    margin: 0;
+}
+
+.menuItem + .menuItem {
+    margin-left: 20px;
+}
+
+.menuItem img {
+    margin-bottom: 2.5px;
+    width: 25px;
+}
+
+/* Media query for screens smaller than 768px (tablets and mobile devices) */
+@media (max-width: 768px) {
+    .menuItems {
+        width: 60%;
+        height: 55px;
+        border: 1px #C1A1A7 solid;
+        padding: 0 7.5px;
+    }
+
+    .menuItemText {
+        color: #C1A1A7;
+        font-size: 10px;
+    }
+
+    .menuItem + .menuItem {
+        margin-left: 25px;
+    }
+
+    .menuItem img {
+        margin-bottom: 2.5px;
+        width: 20px;
+    }
+}
+
+
+.containerTerm {
+    margin-top: 30px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 50px 20px; /* Padding actualizado */
+    color: #602131;
+
+}
+
+/* Estilos específicos de elementos */
+.containerTerm .title {
+        margin-top: 30px;
+    width: 100%;
+    text-align: center;
+    font-family: 'Athelas', serif;
+    font-size: 32px;
+    font-style: italic;
+    font-weight: 700;
+    line-height: 38.40px;
+    word-wrap: break-word;
+    margin-bottom: 20px;
+}
+
+.containerTerm .subtitle {
+    max-width: 90%;
+    width: 301px;
+    text-align: center;
+    font-family: 'Avenir', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16.80px;
+    word-wrap: break-word;
+    margin-bottom: 20px;
+}
+
+.containerTerm .content {
+    max-width: 90%;
+    width: 337px;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 21.60px;
+    word-wrap: break-word;
+}
+
+/* Estilos para tabletas */
+@media (min-width: 820px) {
+    .containerTerm .title {
+        font-size: 34px;
+    }
+
+    .containerTerm .subtitle {
+        font-size: 16px;
+    }
+
+    .containerTerm .content {
+        font-size: 20px;
+    }
+}

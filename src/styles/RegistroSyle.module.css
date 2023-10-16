@@ -1,0 +1,155 @@
+body {
+  height: 100%;
+}
+
+/* Estilos para Registro e Inicio de sesión */
+.tab-container {
+    width: 90%;
+    margin: auto;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.tab-link {
+    flex: 1;
+    text-align: center;
+    color: #C1A1A7;
+    font-size: 21px;
+    font-family: Athelas;
+    font-style: italic;
+    font-weight: 700;
+    text-decoration: none;
+    padding: 10px 0;
+    border-bottom: 1px solid #C1A1A7;
+}
+
+.tab-link.active {
+    color: #602131;
+    border-bottom: 3px solid #602131;
+}
+
+/* Estilos para el formulario y botones */
+.container {
+    width: 90%;
+    margin: auto;
+}
+
+.social-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.btn {
+    padding: 14px 30px;
+    border-radius: 50px;
+    border: 1px #602131 solid;
+    color: #602131;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    display: block;
+    width: 80%;
+    margin: 20px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn span {
+    flex-grow: 1;
+}
+
+.btn-google::before, .btn-facebook::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.btn-google::before {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><path fill="#4285F4" d="M46.5 20H24v8.5h13.8C37.7 33.9 31 37.8 24 37.8c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.9 0 7.5 1.5 10.2 4l7.7-7.7C34 4.2 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c13 0 21.5-10 21.5-22 0-1.3-.2-2.7-.5-4z"/></svg>');
+}
+
+.btn-facebook::before {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><path fill="#3C5A99" d="M24 48C10.8 48 0 37.2 0 24S10.8 0 24 0s24 10.8 24 24c0 12.8-10.2 23.3-22.8 23.9v-16.9h7.1l1.1-7.5h-8.3V17c0-2.2.6-3.7 3.8-3.7l4-.2V6.8c-.7-.1-3.1-.3-5.9-.3-5.8 0-9.8 3.5-9.8 10v5.5h-6.6v7.5h6.6v18.5C9.2 41.9 2.4 34 .1 24H0C0 37.2 10.8 48 24 48z"/></svg>');
+}
+
+.divider {
+    text-align: left;
+    margin-bottom: 20px;
+    color: #602131;
+    font-size: 14px;
+}
+
+input[type="text"], input[type="password"], input[type="email"], input[type="date"], select {
+    width: 100%;
+    padding: 10px 0;
+    margin-bottom: 15px;
+    border: none;
+    border-bottom: 1px solid #C1A1A7;
+    font-size: 14px;
+    color: #C1A1A7;
+    background: transparent;
+    outline: none;
+    transition: all 0.3s;
+    appearance: none;
+}
+
+select {
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 14 10"><path fill="#602131" d="M7 10L0 0h14L7 10z"/></svg>') no-repeat;
+    background-position: right 10px center;
+    padding-right: 25px;
+}
+
+input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus, input[type="date"]:focus, select:focus {
+    border-bottom: 1px solid #602131;
+}
+
+input[type="text"]::placeholder, input[type="password"]::placeholder, input[type="email"]::placeholder, input[type="date"]::placeholder, select::placeholder {
+    color: #C1A1A7;
+    font-size: 14px;
+    opacity: 1; /* Firefox */
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    color: #602131;
+
+}
+
+.checkbox-group input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.login-link {
+    text-align: center;
+    margin-top: 20px;
+    color: #602131;
+}
+
+.login-link a {
+    color: #602131;
+    text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        max-width: 100%;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}

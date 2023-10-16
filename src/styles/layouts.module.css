@@ -1,0 +1,223 @@
+/* === GLOBAL STYLES === */
+
+body {
+    margin: auto;
+    font-family: Athelas;
+}
+
+@font-face {
+    font-family: Athelas;
+    src: url(../assets/fonts/Athelas-Italic.ttf);
+}
+
+/* === DESKTOP CONTAINER STYLES === */
+
+.desktopContainer {
+    min-height: 90vh;
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.desktopContainer .logoDesktop,
+.desktopContainer .iconEntreCopasDesktop,
+.desktopContainer .textContainerDesktop {
+    max-width: 100%;
+    position: relative;
+    margin: 10px 10px 0 10px;
+}
+
+.desktopContainer .logoDesktop {
+    margin-top: 5%;
+}
+
+.desktopContainer .iconEntreCopasDesktop {
+    margin-top: 5%;
+}
+
+.desktopContainer .textContainerDesktop {
+    margin-top: 2.5%;
+    text-align: center;
+    color: #602131;
+    font-size: 1.8rem;
+    font-family: 'Athelas', sans-serif;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.2;
+    word-wrap: break-word;
+}
+
+
+/* === NAVBAR STYLES === */
+
+.Navbar {
+    background-color: #46ACC2;
+    display: flex;
+    padding: 16px;
+    font-family: sans-serif;
+    color: white;
+}
+
+.Navbar__Items {
+    display: flex;
+}
+
+.Navbar__Link {
+    padding-right: 8px;
+}
+
+/* === MENU HEADER STYLES === */
+
+.containerMenuHeader {
+    width: 100%;
+    max-height: 100vh;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    margin-bottom: 50px;
+}
+
+.menuItems {
+    width: 60%;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #F7F3EF;
+    box-shadow: 0px 6px 8px rgba(83.94, 9.09, 9.09, 0.18);
+    border-radius: 35px;
+    border: 1px #C1A1A7 solid;
+    padding: 0 15px;
+}
+
+.menuItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border: none;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+}
+
+.menuItem:hover {
+    opacity: 0.9;
+}
+
+.menuItem:focus {
+    outline: none;
+}
+
+.menuItemText {
+    color: #C1A1A7;
+    font-size: 13px;
+    font-family: Avenir, sans-serif;
+    font-weight: 400;
+    margin: 0;
+}
+
+.menuItem + .menuItem {
+    margin-left: 20px;
+}
+
+.menuItem img {
+    margin-bottom: 2.5px;
+    width: 25px;
+}
+
+/* === MEDIA QUERIES === */
+
+@media (max-width: 768px) {
+    .menuItems {
+        width: 60%;
+        height: 55px;
+        border: 1px #C1A1A7 solid;
+        padding: 0 7.5px;
+    }
+
+    .menuItemText {
+        font-size: 10px;
+    }
+
+    .menuItem + .menuItem {
+        margin-left: 25px;
+    }
+
+    .menuItem img {
+        width: 20px;
+    }
+}
+@media (max-width: 768px) {
+    .desktopContainer .textContainerDesktop {
+        font-size: 1.5rem;
+    }
+}
+
+
+.containerTerm {
+    margin-top: 30px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 50px 20px; /* Padding actualizado */
+    color: #602131;
+
+}
+
+/* Estilos específicos de elementos */
+.containerTerm .title {
+    width: 100%;
+    text-align: center;
+    font-family: 'Athelas', serif;
+    font-size: 32px;
+    font-style: italic;
+    font-weight: 700;
+    line-height: 38.40px;
+    word-wrap: break-word;
+    margin-bottom: 20px;
+}
+
+.containerTerm .subtitle {
+    max-width: 90%;
+    width: 301px;
+    text-align: center;
+    font-family: 'Avenir', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16.80px;
+    word-wrap: break-word;
+    margin-bottom: 20px;
+}
+
+.containerTerm .content {
+    max-width: 90%;
+    width: 337px;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 21.60px;
+    word-wrap: break-word;
+}
+
+/* Estilos para tabletas */
+@media (min-width: 820px) {
+    .containerTerm .title {
+        font-size: 34px;
+    }
+
+    .containerTerm .subtitle {
+        font-size: 16px;
+    }
+
+    .containerTerm .content {
+        font-size: 20px;
+    }
+}
