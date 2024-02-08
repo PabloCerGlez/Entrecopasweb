@@ -1,0 +1,8 @@
+.register-btn {
+    transition: all 0.3s;
+}
+
+.register-btn:hover {
+    background-color: #602131;
+    color: #FFFFFF;
+}

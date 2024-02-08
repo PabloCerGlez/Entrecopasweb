@@ -1,5 +1,5 @@
 import React from 'react';
-import Help from 'assets/images/headerCode.PNG';
+import Help from 'assets/images/perfil.svg';
 
 // Estilos CSS en un objeto para el componente
 const styles = {

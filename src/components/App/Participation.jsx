@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import iconEnterAccount from "assets/images/iconEnterAccount.svg";
 import iconStartExperience from "assets/images/iconStartExperience.svg";
 import iconCreateAccount from "assets/images/iconCreateAccount.svg";
@@ -10,17 +10,14 @@ const styles = {
         margin: 0,
         padding: 0,
         background: '#F7F3EF',/* Sets the background color of the app to a light beige */
-
     },
     container: {
-
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
         height: '100%',
         margin: '45px auto',
-
         gap: '16px'
     },
     section: {
@@ -60,7 +57,6 @@ const styles = {
         lineHeight: '21.60px',
         fontWeight: 700,
         color: '#602131',
-
     },
     divider: {
         width: '337px',
@@ -82,34 +78,41 @@ const styles = {
 };
 
 const Participation = () => {
+    const [data, setData] = useState(null);
+
+    useEffect(() => {
+        fetch('http://167.172.120.46/api/view-home', {
+            method: 'GET',
+            headers: {
+                'Cookie': 'XSRF-TOKEN=...; entre_copas_session=...'
+                // Asegúrate de completar la cookie correctamente
+            }
+        })
+        .then(response => response.json())
+        .then(data => setData(data))
+        .catch(error => console.error('Error:', error));
+    }, []);
+
+    if (!data) {
+        return <div>Cargando...</div>;
+    }
+
+    const steps = data.como_participar.steps.map((step, index) => (
+        <div key={index} style={styles.section}>
+            <img width="78" height="60" src={`http://167.172.120.46/${step.icon_url}`} alt={`Section ${index + 1}`} />
+            <div>
+                <div style={{ ...styles.textStyles, ...styles.sectionTitle }}>{step.title}</div>
+                <div style={{ ...styles.textStyles, ...styles.sectionDesc }}>{step.description}</div>
+            </div>
+        </div>
+    ));
+
     return (
-        <div style={styles.container}>
+        <div id="section-below" style={styles.container}>
             <img width="26" height="26" src={iconHelpParticipation} alt="Placeholder" />
-            <div style={styles.header}>¿Cómo participar?</div>
-            <div style={styles.section}>
-                <img width="78" height="60" src={iconCreateAccount} alt="Section 1" />
-                <div>
-                    <div style={{ ...styles.textStyles, ...styles.sectionTitle }}>Crea tu cuenta</div>
-                    <div style={{ ...styles.textStyles, ...styles.sectionDesc }}>Descripción corta, facilisis felis ac, viverra elit. Curabitur suscipit sem at magna commodo.</div>
-                </div>
-            </div>
-            <div style={styles.divider}></div>
-            <div style={styles.section}>
-                <img width="78" height="76" src={iconEnterAccount} alt="Section 2" />
-                <div>
-                    <div style={{ ...styles.textStyles, ...styles.sectionTitle }}>Ingresa el código</div>
-                    <div style={{ ...styles.textStyles, ...styles.sectionDesc }}>Descripción corta, facilisis felis ac, viverra elit. Curabitur suscipit sem at magna commodo.</div>
-                </div>
-            </div>
-            <div style={styles.divider}></div>
-            <div style={styles.section}>
-                <img width="78" height="70" src={iconStartExperience} alt="Section 3" />
-                <div>
-                    <div style={{ ...styles.textStyles, ...styles.sectionTitle }}>Comienza tu experiencia</div>
-                    <div style={{ ...styles.textStyles, ...styles.sectionDesc }}>Descripción corta, facilisis felis ac, viverra elit. Curabitur suscipit sem at magna commodo.</div>
-                </div>
-            </div>
-            <button style={styles.startButton}>Comenzar</button>
+            <div style={styles.header}>{data.como_participar.title}</div>
+            {steps}
+            <button style={styles.startButton}>botón</button>
         </div>
     );
 };

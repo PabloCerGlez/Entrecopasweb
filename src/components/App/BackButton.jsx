@@ -1,8 +1,9 @@
-// BackButton.jsx
-
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const BackButton = () => {
+    const navigate = useNavigate();
+
     const styles = {
         color: '#602131',
         fontSize: '14px',
@@ -16,11 +17,14 @@ const BackButton = () => {
         position: 'relative',
         left: '0px',
         marginRight: 'auto',
-
     };
 
+    const handleBackClick = (e) => {
+        e.preventDefault();
+        navigate(-1);   // Navega hacia atrás
+    };
     return (
-        <a href="#" style={styles}>
+        <a  style={styles} onClick={handleBackClick}>
             &lt;&lt; Regresar
         </a>
     );

@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from 'components/App/Navbar';
-import CentroAyuda from 'components/App/HeaderCode';
+import HeaderProfile from 'components/App/HeaderProfile';
+// Así debes importarlo si estás usando export default
+import UserProfile from 'components/App/UserProfile';
+
 import Footer from 'components/App/Footer';
 import BackButton from 'components/App/BackButton'
 
@@ -36,6 +39,7 @@ function LayoutTerm() {
       justifyContent: 'center',
       height: '100%',
       margin: '65px',
+      marginTop: '-25px',
 
       gap: '16px'
   },
@@ -47,19 +51,16 @@ function LayoutTerm() {
 };
   return (
     <div>
-       <Navbar/>
-       <div style={styles.BackButton}>
-
-       <BackButton/>   
-
-       </div>
+      
 
       <div style={styles.container}>  
 
-        <CentroAyuda/>
+      <HeaderProfile/>
 
       </div>
-     
+      <UserProfile/>
+
+      
   
   <Footer/>
     </div>

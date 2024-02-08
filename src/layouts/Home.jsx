@@ -6,14 +6,26 @@ import Participation from 'components/App/Participation';
 import Carrousel from 'components/App/Carrousel';
 import Footer from 'components/App/Footer';
 
-import headerBackGround from "assets/images/headerBackGround.png";
-import headerBackGroundLarge from "assets/images/headerBackGroundLarge.png";
-  // Asegúrate de tener esta imagen
+const API_URL = 'http://167.172.120.46/api/view-home';
 
 function App() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
+  const [backgroundImageUrl, setBackgroundImageUrl] = useState('');
+  
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(API_URL);
+        const data = await response.json();
+        const backgroundImageUrl = `http://167.172.120.46/${data.encabezado.slider_cover[0].url}`;
+        setBackgroundImageUrl(backgroundImageUrl);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    
+    fetchData();
+
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
     }
@@ -26,7 +38,7 @@ function App() {
   }, []);
 
   const backgroundStyle = {
-    backgroundImage: windowWidth >= 670 ? `url(${headerBackGroundLarge})` : `url(${headerBackGround})`,
+    backgroundImage: windowWidth >= 670 ? `url(${backgroundImageUrl})` : '',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center center',
@@ -35,32 +47,21 @@ function App() {
     height: '100vh',
     backgroundColor: '#F5F1ED',
   };
-  const styles = {
-    body: {
-        height: '100%',
-        margin: 0,
-        padding: 0,
-        background: '#F7F3EF',/* Sets the background color of the app to a light beige */
 
-    }
-
-};
   return (
     <div>
       <div style={backgroundStyle}>  
         <NavBarButton/>
         <HeaderText/>
-        
         <MenuHeader/>
       </div>
       <div style={{ backgroundColor: '#F5F1ED'}}>     
-      <Participation/>
-
+        <Participation/>
       </div>
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center',backgroundColor: '#F5F1ED',   margin: '60px auto'}}>
-  <Carrousel/>
-</div>
-  <Footer/>
+        <Carrousel/>
+      </div>
+      <Footer/>
     </div>
   );
 }

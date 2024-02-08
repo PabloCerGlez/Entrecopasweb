@@ -70,13 +70,13 @@ const CombinedFooter = () => {
             <div style={styles.container} className="tablet-footer">
                 <div style={styles.footerContent}>
                     <img style={styles.logo}src={LogoFooter}  alt="Logo Placeholder" />
-                    <a href="#" style={styles.linkText}>Iniciar sesión</a>
-                    <a href="#" style={styles.linkText}>Centro de ayuda</a>
-                    <a href="#" style={styles.linkText}>Términos y Condiciones</a>
+                    <a href="/login" style={styles.linkText}>Iniciar sesión</a>
+                    <a href="/centro-ayuda" style={styles.linkText}>Centro de ayuda</a>
+                    <a href="/termino-y-condiciones" style={styles.linkText}>Términos y Condiciones</a>
                 </div>
                 <div style={styles.divider}> <hr></hr></div>
                 <div style={styles.copyrightText}>
-                    Copyright © 2023 LOREM IPSUM DOLOR SIT AMET
+                    Copyright © 2024 LOREM IPSUM DOLOR SIT AMET
                 </div>
             </div>
         </>

@@ -1,10 +1,11 @@
 import React from 'react';
-import Help from 'assets/images/evaluacionUno.PNG';
+import Help from 'assets/images/evaluacionuno.svg';
 
 // Estilos CSS en un objeto para el componente
 const styles = {
   container: {
-    marginTop:'-36px',
+    marginTop:'-40px',
+    marginBottom:'-40px',
 
     display: 'flex',
     justifyContent: 'center',

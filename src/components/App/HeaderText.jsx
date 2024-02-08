@@ -1,8 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import logoHeader from "assets/images/logoHeader.svg";
 import arrowBottom from "assets/images/arrowBottom.svg";
 
 const HeaderText = () => {
+    const [headerData, setHeaderData] = useState(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch('http://167.172.120.46/api/view-home', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+                const data = await response.json();
+                setHeaderData(data?.encabezado);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+        fetchData();
+    }, []);
+
     const styles = {
         mainContainer: {
             display: 'flex',
@@ -40,27 +60,27 @@ const HeaderText = () => {
             lineHeight: '21px',
             wordWrap: 'break-word',
             margin: '25px auto',
-
         },
         arrow: {
             justifyContent: 'center',
             alignItems: 'center',
-
             marginBottom: '50px',
-
             display: 'relative',
-            bottom: 0,  
+            bottom: 0,
         },
     };
-    
+
     return (
         <div style={styles.mainContainer}>
             <div style={styles.containerHeaderText}>
                 <img style={styles.mainImage} src={logoHeader} alt="Imagen representativa" />
-                <div style={styles.welcomeMessage}>Mensaje de bienvenida al portal</div>
-                <div style={styles.description}>Descripción corta, facilisis felis ac, viverra elit. Curabitur suscipit sem at magna commodo.</div>
-                <div style={styles.arrow}><img src={arrowBottom}  style={{ width: '30px' }} alt="Arrow Icon" /></div>
-
+                {headerData && (
+                    <>
+                        <div style={styles.welcomeMessage}>{headerData.title}</div>
+                        <div style={styles.description}>{headerData.description}</div>
+                    </>
+                )}
+                <a href="#section-below" style={styles.arrow}><img src={arrowBottom} style={{ width: '30px' }} alt="Arrow Icon" /></a>
             </div>
         </div>
     );

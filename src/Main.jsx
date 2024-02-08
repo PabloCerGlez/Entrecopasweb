@@ -16,6 +16,7 @@ import LayoutEvaluacionDos from 'layouts/LayoutEvaluacionDos';
 import LayoutEvaluacionTres from 'layouts/LayoutEvaluacionTres';
 import LayoutEvaluacionSeis from 'layouts/LayoutEvaluacionSeis';
 import LayoutSinCuenta from 'layouts/LayoutSinCuenta';
+import ProtectedRoute from 'components/App/ProtectedRoute';
 
 
 
@@ -23,7 +24,7 @@ import LayoutSinCuenta from 'layouts/LayoutSinCuenta';
 import App from 'components/App/App';
 
 
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 
 function Main() {
   // Declare a state variable 'isDesktop' to keep track of the window size.
@@ -51,27 +52,30 @@ function Main() {
   return (
     <Router>
     <Routes>
-        <Route path="/login" element={isDesktop ? <DesktopAlert/> : <LayoutLogin/>} />
-        <Route path="/registro"  element={isDesktop ? <DesktopAlert/> : <LayoutLoginRegister/>} />
-        <Route path="/termino-y-condiciones"  element={isDesktop ? <DesktopAlert/> : <LayoutTerm/>} />
-        <Route path="/cambio-contrasena"  element={isDesktop ? <DesktopAlert/> : <LayoutChangePassword/>} />
-        <Route path="/profile"  element={isDesktop ? <DesktopAlert/> : <LayoutMyData/>} />
-        <Route path="/nueva-password"  element={isDesktop ? <DesktopAlert/> : <LayoutNewPassword/>} />
-        <Route path="/centro-ayuda"  element={isDesktop ? <DesktopAlert/> : <LayoutHelp/>} />
-        <Route path="/comencemos"  element={isDesktop ? <DesktopAlert/> : <LayoutComencemos/>} />
-        <Route path="/mi-evaluacion"  element={isDesktop ? <DesktopAlert/> : <LayoutMiEvaluacion/>} />
-        <Route path="/mi-evaluacion"  element={isDesktop ? <DesktopAlert/> : <LayoutMiEvaluacion/>} />
-        <Route path="/perfil-code"  element={isDesktop ? <DesktopAlert/> : <LayoutCode/>} />
-        <Route path="/recompesas"  element={isDesktop ? <DesktopAlert/> : <LayoutRecompesas/>} />
-        <Route path="/evaluacion-uno"  element={isDesktop ? <DesktopAlert/> : <LayoutEvaluacionUno/>} />
-        <Route path="/evaluacion-dos"  element={isDesktop ? <DesktopAlert/> : <LayoutEvaluacionDos/>} />
-        <Route path="/evaluacion-tres"  element={isDesktop ? <DesktopAlert/> : <LayoutEvaluacionTres/>} />
-        <Route path="/evaluacion-seis"  element={isDesktop ? <DesktopAlert/> : <LayoutEvaluacionSeis/>} />
-        <Route path="/sin-cuenta"  element={isDesktop ? <DesktopAlert/> : <LayoutSinCuenta/>} />
+      
+        <Route exact  basename="/login" path="/login" element={isDesktop ? <DesktopAlert/> : <LayoutLogin/>} /> 
+        <Route exact  basename="/registro" path="/registro"  element={isDesktop ? <DesktopAlert/> : <LayoutLoginRegister/>} />
+        <Route exact  basename="/termino-y-condiciones" path="/termino-y-condiciones"  element={isDesktop ? <DesktopAlert/> : <LayoutTerm/>} />
+        <Route exact  basename="/cambio-contrasena" path="/cambio-contrasena"  element={isDesktop ? <DesktopAlert/> : <LayoutChangePassword/>} />
+        <Route exact  basename="/profile" path="/profile"  element={isDesktop ? <DesktopAlert/> : <LayoutMyData/>} />
+        <Route exact  basename="/nueva-password" path="/nueva-password"  element={isDesktop ? <DesktopAlert/> : <LayoutNewPassword/>} />
+        <Route exact  basename="/centro-ayuda"  path="/centro-ayuda"  element={isDesktop ? <DesktopAlert/> : <LayoutHelp/>} />
+        <Route exact  basename="/comencemos" path="/comencemos"  element={isDesktop ? <DesktopAlert/> : <LayoutComencemos/>} />
+        <Route exact  basename="/mi-evaluacion"  path="/mi-evaluacion"  element={isDesktop ? <DesktopAlert/> : <LayoutMiEvaluacion/>} />
+        <Route exact  basename="/perfil-code" path="/perfil-code"  element={isDesktop ? <DesktopAlert/> : <LayoutCode/>} />
+        <Route exact  basename="/recompesas" path="/recompesas"  element={isDesktop ? <DesktopAlert/> : <LayoutRecompesas/>} />
+        
+        <Route exact basename="/evaluacion-uno" path="/evaluacion-uno" element={
+    <ProtectedRoute component={isDesktop ? <DesktopAlert/> : <LayoutEvaluacionUno/>} />
+} />
+        <Route exact  basename="/evaluacion-dos" path="/evaluacion-dos"  element={isDesktop ? <DesktopAlert/> : <LayoutEvaluacionDos/>} />
+        <Route exact  basename="/evaluacion-tres" path="/evaluacion-tres"  element={isDesktop ? <DesktopAlert/> : <LayoutEvaluacionTres/>} />
+        <Route exact  basename="/evaluacion-seis" path="/evaluacion-seis"  element={isDesktop ? <DesktopAlert/> : <LayoutEvaluacionSeis/>} />
+        <Route exact  basename="/sin-cuenta" path="/sin-cuenta"  element={isDesktop ? <DesktopAlert/> : <LayoutSinCuenta/>} />
 
 
               
-        <Route path="/"  element={isDesktop ? <DesktopAlert/> : <App/>} />
+        <Route exact   basename="/" path="/"  element={isDesktop ? <DesktopAlert/> : <App/>} />
     </Routes>
 </Router> 
 

@@ -1,9 +1,11 @@
 import React from 'react';
-import Help from 'assets/images/headerRecompesasList.PNG';
+import Help from 'assets/images/recompesas.svg';
 
 // Estilos CSS en un objeto para el componente
 const styles = {
   container: {
+    marginTop:'40px',
+
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',

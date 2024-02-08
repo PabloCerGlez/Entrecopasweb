@@ -4,11 +4,7 @@ import { Link } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import Button from '@mui/material/Button';
-import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
-import Backdrop from '@mui/material/Backdrop';
-import Fade from '@mui/material/Fade';
 import LogoBlk from "assets/images/LogoBlk.png";
 
 export default function Navbar() {
@@ -22,11 +18,63 @@ export default function Navbar() {
   const handleClose = () => {
     setOpen(false);
   };
-
+  const styles = {
+    tabContainer: {
+        width: '100%',
+        marginTop: '80px',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 20,
+    },
+    tabLink: {
+        flex: 1,
+        textAlign: 'center',
+        color: '#602131',
+        fontSize: 21,
+        fontFamily: 'Athelas',
+        fontStyle: 'italic',
+        fontWeight: 700,
+        textDecoration: 'none',
+        padding: '10px 0',
+        borderBottom: '3px solid #602131',
+    },
+    activeTabLink: {
+        color: '#C1A1A7',
+        borderBottom: '1px solid #C1A1A7',
+    },
+    container: {
+        width: '100%',
+        margin: 'auto',
+    },
+    socialButtons: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        marginBottom: 20,
+    },
+    btn: {
+        padding: '14px 30px',
+        borderRadius: 50,
+        border: '1px #602131 solid',
+        color: '#602131',
+        fontWeight: 'bold',
+        textAlign: 'center',
+        cursor: 'pointer',
+        display: 'block',
+        width: '80%',
+        margin: '20px auto',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    modalTitle:{
+      color: '#602131',
+      fontsize: '18px',
+    }
+  };
   return (
-    <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', }}>
+    <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
       <AppBar position="absolute" elevation={0} sx={{ width: '100%', backgroundColor: '#F7F3EF' }}>
-        <Toolbar sx={{ minHeight: '100px', display: 'flex', justifyContent: 'space-between' }}>
+        <Toolbar sx={{ minHeight: '100px', display: 'flex', justifyContent: 'center' }}>
           <Link to="/">
             <img 
               src={LogoBlk} 
@@ -34,33 +82,6 @@ export default function Navbar() {
               style={{ cursor: 'pointer' }}
             />
           </Link>
-          <Button 
-  onClick={(e) => handleOpen(e)}
-  sx={{
-              paddingLeft: '30px',
-              paddingRight: '30px',
-              paddingTop: '14px',
-              paddingBottom: '14px',
-              background: '#602131',
-              borderRadius: '35px',
-              border: 'none',
-              cursor: 'pointer'
-            }}
-          >
-            <Typography 
-              sx={{
-                textAlign: 'center',
-                color: '#F7F3EF',
-                fontSize: '13px',
-                fontFamily: 'Athelas',
-                fontWeight: 700,
-                lineHeight: '15.60px',
-                wordWrap: 'break-word'
-              }}
-            >
-              Comenzar
-            </Typography>
-          </Button>
         </Toolbar>
         <div style={{
           display: 'flex',
@@ -73,40 +94,6 @@ export default function Navbar() {
           }} />
         </div>
       </AppBar>
-
-      <Modal
-        open={open}
-        onClose={handleClose}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
-        }}
-      >
-        <Fade in={open}>
-          <Box
-            sx={{
-              position: 'absolute',
-              width: '80%',
-              maxWidth: '400px',
-              backgroundColor: 'white',
-              padding: '16px',
-              outline: 'none',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-              borderRadius: '8px'
-            }}
-          >
-            <Typography variant="h6" id="modal-title">
-              Modal
-            </Typography>
-            <Typography variant="subtitle1" id="modal-description">
-            Descripción corta, facilisis felis ac, viverra elit. Curabitur suscipit sem at magna commodo.
-            </Typography>
-          </Box>
-        </Fade>
-      </Modal>
     </Box>
   );
 }

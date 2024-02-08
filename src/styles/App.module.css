@@ -15,6 +15,14 @@ a {
     font-family: Athelas; /* Defines a new font named Athelas */
     src: url(../assets/fonts/Athelas-Italic.ttf); /* Specifies the path to the Athelas-Italic.ttf font file */
 }
+.register-btn {
+    transition: all 0.3s;
+}
+
+.register-btn:hover {
+    background-color: #602131;
+    color: #FFFFFF;
+}
 
 .desktopContainer {
     min-height: 90vh; /* Ensures the container has at least 90% of the viewport height */
@@ -198,7 +206,20 @@ a {
     word-wrap: break-word;
     margin-bottom: 20px;
 }
+.titleAcc{
+    color: #602131;
+    font-size: 18px;
 
+}
+.subtitleAcc{
+    color: #602131;
+    font-size: 10px;
+}
+
+
+.AccordionBackgroundBlnk, .AccordionBackground {
+    width: 100%;
+}
 .containerTerm .subtitle {
     max-width: 90%;
     width: 301px;
@@ -233,4 +254,12 @@ a {
     .containerTerm .content {
         font-size: 20px;
     }
+}
+
+.AccordionBackgroundBlnk {
+    background-color: #FFFFFF; /* Color blanco */
+}
+
+.AccordionBackgroundColor {
+    background-color: #F0ECE7; /* Color #F0ECE7 */
 }

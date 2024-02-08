@@ -1,10 +1,10 @@
 import React from 'react';
-import Help from 'assets/images/evaluacionTres.png';
+import Help from 'assets/images/evaluaciontres.svg';
 
 // Estilos CSS en un objeto para el componente
 const styles = {
     container: {
-      marginTop:'-36px',
+      marginTop:'-46px',
   
       display: 'flex',
       justifyContent: 'center',
@@ -15,7 +15,7 @@ const styles = {
       // Esconde cualquier contenido que exceda el tamaño del contenedor
     },
     image: {
-          marginTop:'-55px',
+          marginTop:'-70px',
   
       width: '100%',      // Abarca todo el ancho del contenedor
       height: '100%',     // Abarca toda la altura del contenedor
