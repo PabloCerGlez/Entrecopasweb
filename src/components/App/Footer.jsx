@@ -6,7 +6,7 @@ const CombinedFooter = () => {
     const authToken = localStorage.getItem('authToken');
 
     const redirectToProfile = () => {
-        window.location.href = '/perfill-code';
+        window.location.href = '/perfil-code';
     };
 
     const styles = {
