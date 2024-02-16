@@ -9,7 +9,7 @@ const TermsAndConditions = () => {
     // Función para obtener los datos del endpoint
     const fetchTermsAndConditions = async () => {
         try {
-            const response = await fetch('http://167.172.120.46/api/view-termsconditions');
+            const response = await fetch('http://entrecopas.randominteractive.site/api/view-termsconditions');
             const data = await response.json();
             setTermsData(data.terms_conditions);
         } catch (error) {

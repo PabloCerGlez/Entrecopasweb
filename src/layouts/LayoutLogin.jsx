@@ -5,7 +5,6 @@ import Footer from 'components/App/Footer';
 
 import headerBackGround from "assets/images/headerBackGround.png";
 import headerBackGroundLarge from "assets/images/headerBackGroundLarge.png";
-  // Asegúrate de tener esta imagen
 
 function LayoutLoginRegister() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -22,38 +21,32 @@ function LayoutLoginRegister() {
     }
   }, []);
 
-
   const styles = {
     body: {
-        height: '100%',
-        margin: 0,
-        padding: 0,
-        background: '#F7F3EF',/* Sets the background color of the app to a light beige */
-
+      height: '100%',
+      margin: 0,
+      padding: 0,
+      backgroundColor: '#ffffff', // Ajuste el color de fondo a blanco
+      color: '#C1A1A7',
     },
     container: {
-
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
-      height: '100%',
-      margin: '65px',
+      marginTop: "50px",
+      padding: '0 20px', // Agrega margen a los lados del contenedor
+      boxSizing: 'border-box', // Asegura que el padding se incluya en el ancho total del contenedor
+    },
+  };
 
-      gap: '16px'
-  },
-
-};
   return (
-    <div>
-       <Navbar/>
+    <div style={styles.body}>
+      <Navbar />
       <div style={styles.container}>  
-      <Login/>
-
+        <Login />
       </div>
-     
-  
-  <Footer/>
+      <Footer />
     </div>
   );
 }

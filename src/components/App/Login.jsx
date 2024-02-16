@@ -4,7 +4,8 @@ import Alert from '@mui/material/Alert';
 import { useNavigate } from 'react-router-dom';
 import { useGoogleLogin } from '@react-oauth/google';
 import { FacebookProvider, LoginButton } from 'react-facebook';
-
+import showIcon from "assets/images/show_icon.svg";
+import hideIcon from "assets/images/hide_icon.svg";
 const handleGoogleLogin = (response) => {
     if (response.tokenId) {
         // Aquí envías el token ID a tu servidor para que lo verifique y establezca la sesión del usuario
@@ -22,6 +23,8 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [openSnackbar, setOpenSnackbar] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState('');
+    const [showPassword, setShowPassword] = useState(false); // Estado para controlar la visibilidad de la contraseña
+
 const [snackbarSeverity, setSnackbarSeverity] = useState('success');
 useEffect(() => {
     // Verificar si FB ya está definido (por ejemplo, si se agregó el script en index.html)
@@ -74,7 +77,7 @@ const errorMessage = (error) => {
         e.preventDefault();
     
         try {
-            const response = await fetch('http://167.172.120.46/api/login', {
+            const response = await fetch('http://entrecopas.randominteractive.site/api/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -94,7 +97,9 @@ const errorMessage = (error) => {
                 
                 // Almacenar el token en localStorage
                 localStorage.setItem('authToken', data.token);
-                
+                                // Almacenar el correo en localStorage
+                                localStorage.setItem('userEmail', email);
+                                localStorage.setItem('userPassword', password);
                 // Si necesitas almacenar datos del usuario, puedes hacerlo también
                 // localStorage.setItem('userData', JSON.stringify(data.user));
     
@@ -133,8 +138,15 @@ const errorMessage = (error) => {
 
         setOpenSnackbar(false);
     };
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
 
     const styles = {
+        body:{
+            backgroundColor: '#ffffffff',
+
+        },
         tabContainer: {
             width: '100%',
             marginTop: '80px',
@@ -142,6 +154,7 @@ const errorMessage = (error) => {
             justifyContent: 'center',
             alignItems: 'center',
             marginBottom: 20,
+
         },
         tabLink: {
             flex: 1,
@@ -181,6 +194,7 @@ const errorMessage = (error) => {
             margin: '20px auto',
             alignItems: 'center',
             justifyContent: 'center',
+
         },
                 btnGoogle: {
             padding: '14px 30px',
@@ -288,8 +302,10 @@ const errorMessage = (error) => {
                 <div style={styles.divider}>O Inicia sesión aquí:</div>
                 <form onSubmit={handleTempLogin}>
                     <input type="email" id="correo" required placeholder="Correo*" style={styles.input} value={email} onChange={(e) => setEmail(e.target.value)} />
-                    <input type="password" id="password" required placeholder="Contraseña*" style={styles.input} value={password} onChange={(e) => setPassword(e.target.value)} />
-                    <div style={styles.loginLinkPassword}>
+                    <div style={{ position: 'relative' }}>
+                    <input type={showPassword ? "text" : "password"} id="password" required placeholder="Contraseña*" style={styles.input} value={password} onChange={(e) => setPassword(e.target.value)} />
+                    <img src={showPassword ? showIcon : hideIcon} alt="Toggle Password Visibility" style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', cursor: 'pointer' }} onClick={togglePasswordVisibility} />
+                </div>                    <div style={styles.loginLinkPassword}>
                    <a href="/registro" style={{      textAlign: 'right',color: '#602131', textDecoration: 'underline' }}>  ¿Ha olvidado la contraseña? </a>
                 </div>
                     <input type="submit" value="Iniciar sesión" style={styles.btn} />

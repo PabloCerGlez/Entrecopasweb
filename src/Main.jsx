@@ -17,7 +17,9 @@ import LayoutEvaluacionTres from 'layouts/LayoutEvaluacionTres';
 import LayoutEvaluacionSeis from 'layouts/LayoutEvaluacionSeis';
 import LayoutSinCuenta from 'layouts/LayoutSinCuenta';
 import ProtectedRoute from 'components/App/ProtectedRoute';
+import LayoutEvaluacionPrincipal from 'layouts/LayoutEvaluacionPrincipal';
 
+import LayoutEvaluacionVisual from 'layouts/LayoutEvaluacionVisual';
 
 
 
@@ -72,9 +74,12 @@ function Main() {
         <Route exact  basename="/evaluacion-tres" path="/evaluacion-tres"  element={isDesktop ? <DesktopAlert/> : <LayoutEvaluacionTres/>} />
         <Route exact  basename="/evaluacion-seis" path="/evaluacion-seis"  element={isDesktop ? <DesktopAlert/> : <LayoutEvaluacionSeis/>} />
         <Route exact  basename="/sin-cuenta" path="/sin-cuenta"  element={isDesktop ? <DesktopAlert/> : <LayoutSinCuenta/>} />
+        <Route exact  basename="/evaluacion-principal" path="/evaluacion-principal"  element={isDesktop ? <DesktopAlert/> : <LayoutEvaluacionPrincipal/>} />
+        <Route exact  basename="/evaluacion_visual" path="/evaluacion_visual"  element={isDesktop ? <DesktopAlert/> : <LayoutEvaluacionVisual/>} />
 
 
               
+        
         <Route exact   basename="/" path="/"  element={isDesktop ? <DesktopAlert/> : <App/>} />
     </Routes>
 </Router> 

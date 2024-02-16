@@ -15,7 +15,7 @@ const TermsAndConditions = () => {
     });
 
     useEffect(() => {
-        fetch('http://167.172.120.46/api/view-frequentquestions')
+        fetch('http://entrecopas.randominteractive.site/api/view-frequentquestions')
             .then(response => response.json())
             .then(data => {
                 setData({

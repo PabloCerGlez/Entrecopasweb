@@ -8,7 +8,7 @@ const HeaderText = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('http://167.172.120.46/api/view-home', {
+                const response = await fetch('http://entrecopas.randominteractive.site/api/view-home', {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',

@@ -1,24 +1,71 @@
 
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import Grid from '@mui/material/Grid';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
+import show_icon from "assets/images/show_icon.svg";
+import hide_icon from "assets/images/hide_icon.svg";
+
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import 'styles/Register.module.css';
-
+import Button from '@mui/material/Button';
+import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
+import { styled } from '@mui/material/styles';
 
 const RegisterLogin = () => {
     const [openSnackbar, setOpenSnackbar] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState('');
 const [snackbarSeverity, setSnackbarSeverity] = useState('success');
 const [showTooltip, setShowTooltip] = useState(false);
+const [showPassword, setShowPassword] = useState(false); // Estado para controlar la visibilidad de la contraseña
 
+const [showConfirmPassword, setShowConfirmPassword] = useState(false); // Estado para mostrar/ocultar la confirmación de la contraseña
+
+const [formFields, setFormFields] = useState({});
+
+// Función para alternar la visibilidad de la contraseña
+const togglePasswordVisibility = (field) => {
+    if (field === 'password') {
+        setShowPassword(!showPassword);
+    } else if (field === 'confirm_password') {
+        setShowConfirmPassword(!showConfirmPassword);
+    }
+};
+// Obtener los campos del formulario de la API
+useEffect(() => {
+    const fetchData = async () => {
+        try {
+            const response = await fetch('http://entrecopas.randominteractive.site/api/view-register');
+            const data = await response.json();
+            setFormFields(data.formulario);
+        } catch (error) {
+            console.error('Error fetching form fields:', error);
+        }
+    };
+
+    fetchData();
+}, []);
+
+
+const HtmlTooltip = styled(({ className, ...props }) => (
+    <Tooltip {...props} classes={{ popper: className }} />
+  ))(({ theme }) => ({
+    [`& .${tooltipClasses.tooltip}`]: {
+      backgroundColor: '#ffffffff',
+      color: '#602131',
+      maxWidth: 220,
+      fontSize: theme.typography.pxToRem(12),
+    },
+  }));
+  
     // Estilos
     const styles = {
-       
+     body:{
+        padding: '20px', // Agrega padding alrededor del contenedor
+
+     },
         tabContainer: {
             width: '100%',
             marginTop: '80px',
@@ -52,6 +99,7 @@ const [showTooltip, setShowTooltip] = useState(false);
             display: 'flex',
             justifyContent: 'space-between',
             marginBottom: 20,
+
         },
         btn: {
             padding: '14px 30px',
@@ -66,6 +114,8 @@ const [showTooltip, setShowTooltip] = useState(false);
             margin: '20px auto',
             alignItems: 'center',
             justifyContent: 'center',
+            backgroundColor: '#ffffffff',
+
         },
         divider: {
             textAlign: 'left',
@@ -85,6 +135,9 @@ const [showTooltip, setShowTooltip] = useState(false);
             outline: 'none',
             transition: 'all 0.3s',
             appearance: 'none',
+            '::placeholder': { // Modificar el color del placeholder
+                color: '#602131',
+            },
         },
         checkboxGroup: {
             display: 'flex',
@@ -153,7 +206,20 @@ const [showTooltip, setShowTooltip] = useState(false);
         tooltipTextVisible: {
             visibility: 'visible',
             opacity: 1
-        }
+        },
+                // Nuevo estilo para el botón de visibilidad de la contraseña
+                passwordVisibilityButton: {
+                    position: 'absolute',
+                    right: 0,
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    cursor: 'pointer',
+                    zIndex: 1,
+                    backgroundColor: 'transparent',
+                    border: 'none',
+                    outline: 'none',
+                    marginRight: '10px',
+                },
         
     };
 
@@ -165,7 +231,9 @@ const [showTooltip, setShowTooltip] = useState(false);
         password: '',
         password_confirmation: '',
         terms: false,
-        offers: false
+        offers: false,
+        fecha_nacimiento: ''
+
     });
 
     const [message, setMessage] = useState(null);
@@ -201,8 +269,9 @@ const [showTooltip, setShowTooltip] = useState(false);
 
         }
 
+
         try {
-            const response = await fetch('http://167.172.120.46/api/registerAccount', {
+            const response = await fetch('http://entrecopas.randominteractive.site/api/registerAccount', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -279,60 +348,109 @@ const [showTooltip, setShowTooltip] = useState(false);
 
             <div style={styles.container}>
       
-                <div style={styles.socialButtons}>
-                    <div style={styles.btn}>Google</div>
-                    <div style={styles.btn}>Facebook</div>
-                </div>
+            <div style={{ ...styles.socialButtons, justifyContent: 'space-between', marginBottom: 20 }}>
+    <div style={{ ...styles.btn, marginRight: '10px' }}>Google</div>
+    <div style={{ ...styles.btn, marginLeft: '10px' }}>Facebook</div>
+</div>
+
                 <div style={styles.divider}>O Registrate aquí:</div>
                 <form onSubmit={handleSubmit}>
-                    <input type="text" id="name" value={formData.name} onChange={handleChange} required placeholder="Nombre*" style={styles.input} />
-                    <input type="text" id="apellidos" required placeholder="Apellidos*" style={styles.input} />
-                    <input type="email" id="email" value={formData.email} onChange={handleChange} required placeholder="Correo*" style={styles.input} />
+                    <input type="text" id="name" value={formData.name} onChange={handleChange} required placeholder={formFields.input_name ? formFields.input_name.texto : ''} style={styles.input} />
+                    <input type="text" id="apellidos" required  placeholder={formFields.input_lastnames ? formFields.input_lastnames.texto : ''} style={styles.input} />
+                    <input type="email" id="email" value={formData.email} onChange={handleChange} required placeholder={formFields.input_email ? formFields.input_email.texto : ''} style={styles.input} />
                     <select id="estado" required style={styles.input}>
-                        <option value="" disabled selected>Estado*</option>
-                        <option>Aguascalientes</option>
-                        {/* ... otros estados ... */}
-                        <option>Zacatecas</option>
+                        <option value="" disabled selected >{formFields.combo_state ? formFields.combo_state.texto : ''}</option>
+                        <option>México</option>
+
                     </select>
-                    <input type="date" id="fecha-nacimiento" placeholder="Fecha de nacimiento" style={styles.input} onChange={handleChange} />
-{ !isOfAge && <span style={{color: 'red', fontSize: 12}}>Debes ser mayor de 18 años para registrarte.</span> }
+                    <input
+                    type="date"
+                    id="fecha-nacimiento"
+                    placeholder={formFields.input_birthdate ? formFields.input_birthdate.texto : ''}
+                    style={styles.input}
+                    onChange={handleChange}
+                />
+                { !isOfAge && <span style={{color: 'red', fontSize: 12}}>Debes ser mayor de 18 años para registrarte.</span> }
                     <select id="genero" required style={styles.input}>
-                        <option value="" disabled selected>Género*</option>
+                        <option value="" disabled selected>{formFields.input_gender ? formFields.input_gender.texto : ''}</option>
                         <option value="masculino">Masculino</option>
                         <option value="femenino">Femenino</option>
                         <option value="otro">Otro</option>
                     </select>
-                    <input type="text" id="telefono" placeholder="Teléfono" style={styles.input}  />
+                    <input type="text" id="telefono" placeholder={formFields.input_phone ? formFields.input_phone.texto : ''} style={styles.input}  />
            
-                    <span className="tooltip-icon"
-    onMouseEnter={() => setShowTooltip(true)}
-    onMouseLeave={() => setShowTooltip(false)}
->
-    i
-    {showTooltip && 
-        <div style={styles.tooltipText}>El límite de caracteres es 8</div>
-    }
-</span>
-                <input 
-                    type="password"
-                    id="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    required
-                    placeholder="Contraseña*"
-                    style={styles.input} 
-                />
-                <input 
-                    type="password"
-                    id="password_confirmation"
-                    value={formData.password_confirmation}
-                    onChange={handleChange}
-                    required
-                    placeholder="Confirmar contraseña*"
-                    style={passwordsMatch ? styles.input : {...styles.input, borderColor: 'red'}} 
-                />
+       
+
+<HtmlTooltip
+        title={
+          <React.Fragment>
+            <Typography color="inherit">Contraseña: </Typography>
+            <em>{"Mínimo debe tener 8 carácteres, con una mayúscula, un número y signo (@,¡,&) etc."}</em>
+          </React.Fragment>
+        }
+      >
+                <Button
+                    style={{
+                        color: '#602131',
+                        border: '1px solid #602131',
+                        borderRadius: '50%',
+                        width: '22px',
+                        height: '22px',
+                        lineHeight: '22px', // Vertical centering
+                        paddingLeft: '0', // Remove default padding
+                        paddingRight: '0', // Remove default padding
+                        minWidth: 'unset', // Allow button to shrink to content
+                    }}
+                >
+                    <span >?</span>
+                </Button>
+                      </HtmlTooltip>
+                        {/* Campo de contraseña */}
+                        <div style={{ position: 'relative' }}>
+                        <input
+                            type={showPassword ? 'text' : 'password'} // Cambiar el tipo de acuerdo al estado de visibilidad
+                            id="password"
+                            value={formData.password}
+                            onChange={handleChange}
+                            required
+                            placeholder={formFields.input_password ? formFields.input_password.texto : ''}
+                            style={styles.input}
+                        />
+                        {/* Botón de visibilidad de la contraseña */}
+                        <button
+                            type="button"
+                            onClick={() => togglePasswordVisibility('password')}
+                            style={styles.passwordVisibilityButton}
+                        >
+                            <img src={showPassword ? show_icon : hide_icon } alt={showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'} style={{ width: '15px' }} />
+                        </button>
+                    </div>
+
+                    {/* Campo de confirmación de contraseña */}
+                    <div style={{ position: 'relative' }}>
+                        <input
+                            type={showConfirmPassword ? 'text' : 'password'} // Cambiar el tipo de acuerdo al estado de visibilidad
+                            id="password_confirmation"
+                            value={formData.password_confirmation}
+                            onChange={handleChange}
+                            required
+                            placeholder={formFields.input_confirm_pass ? formFields.input_confirm_pass.texto : ''}
+                            style={passwordsMatch ? styles.input : {...styles.input, borderColor: 'red'}} 
+                        />
+                        {/* Botón de visibilidad de la contraseña de confirmación */}
+                        <button
+                            type="button"
+                            onClick={() => togglePasswordVisibility('confirm_password')}
+                            style={styles.passwordVisibilityButton}
+                        >
+                            <img src={showConfirmPassword ? show_icon : hide_icon} alt={showConfirmPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'} style={{ width: '15px' }} />
+                        </button>
+                    </div>
                 { !passwordsMatch && <span style={{color: 'red', fontSize: 12}}>Las contraseñas no coinciden</span> }
                 <div style={styles.checkboxGroup}>
+
+
+
     <input type="checkbox" id="terms" checked={formData.terms} onChange={handleChange} required style={{display: 'none'}}/>
     <label htmlFor="terms" style={styles.customCheckbox}>
         {formData.terms && (
@@ -341,10 +459,10 @@ const [showTooltip, setShowTooltip] = useState(false);
             </svg>
         )}
     </label>
-    Acepto todos los Términos y Condiciones*
+    {formFields.checkbox_terms ? formFields.checkbox_terms.texto : ''}
 </div>
 <div style={styles.checkboxGroup}>
-    <input type="checkbox" id="offers" checked={formData.offers} onChange={handleChange} style={{display: 'none'}}/>
+    <input type="checkbox" required id="offers" checked={formData.offers} onChange={handleChange} style={{display: 'none'}}/>
     <label htmlFor="offers" style={styles.customCheckbox}>
         {formData.offers && (
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -352,7 +470,7 @@ const [showTooltip, setShowTooltip] = useState(false);
             </svg>
         )}
     </label>
-    Quiero recibir ofertas e información
+    {formFields.checkbox_offers ? formFields.checkbox_offers.texto : ''}
 </div>
 
 <input 
@@ -360,6 +478,7 @@ const [showTooltip, setShowTooltip] = useState(false);
     value="Registrarse" 
     style={btnHover ? {...styles.btn, ...styles.btnHover, color: 'white'} : styles.btn} 
     className="register-btn" 
+    
     onMouseEnter={handleMouseEnter}
     onMouseLeave={handleMouseLeave}
 />

@@ -1,41 +1,48 @@
-import React, { useState } from 'react';
-import tempRectangle from "assets/images/tempRectangle.svg";
+import React, { useState, useEffect } from 'react';
+import fondoRecompesas from "assets/images/fondoRecompesas.svg";
 
-const Carrousel = () => {
-    const rewardsData = [
-        {
-            title: "Recompensa 1",
-            image: "https://www.gstatic.com/webp/gallery3/1.sm.png"
-        },
-        {
-            title: "Recompensa 2",
-            image: "https://www.gstatic.com/webp/gallery3/2.sm.png"
-        },
-        {
-            title: "Recompensa 3",
-            image: "https://www.gstatic.com/webp/gallery3/3.sm.png"
-        }
-    ];
+let Carrousel = () => {
+    let [rewardsData, setRewardsData] = useState([]);
+    let [currentRewardIndex, setCurrentRewardIndex] = useState(0);
 
-    const [currentRewardIndex, setCurrentRewardIndex] = useState(0);
+    useEffect(() => {
+        fetch('http://entrecopas.randominteractive.site/api/view-home', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            const rewards = data.recompensas?.rewards || [];
+            const modifiedRewards = rewards.map(reward => ({
+                title: reward.title,
+                image: reward.image.startsWith('http') ? reward.image : `http://entrecopas.randominteractive.site/${reward.image}`,
+            }));
+            setRewardsData(modifiedRewards);
+        })
+        .catch(error => console.error('Error fetching data:', error));
+    }, []);
 
     const styles = {
         container: {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            width: '577px',
-            height: '330px',
+            width: '100%',
+            height: '450px',
             position: 'relative',
+            backgroundImage: `url(${fondoRecompesas})`,
+            backgroundSize: '100% auto',
         },
         mainImage: {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
             width: '240px',
-            height: '253px',
+            height: '233px',
             position: 'absolute',
-            marginTop: '70px',
+            marginTop: '80px',
         },
         innerContainer: {
             width: '337px',
@@ -55,16 +62,19 @@ const Carrousel = () => {
         title: {
             width: '228px',
             left: '55px',
-            top: '0',
+            top: '120', // Ajustar la posición del título más arriba
             position: 'absolute',
             textAlign: 'center',
-            color: '#602131',
+            color: '#ffffffff',
             fontSize: '32px',
             fontFamily: 'Athelas, serif',
             fontStyle: 'italic',
             fontWeight: 700,
             lineHeight: '38.40px',
             wordWrap: 'break-word',
+            marginBottom: '100',
+            marginTop: '-30px',
+
         },
         button: {
             position: 'absolute',
@@ -77,29 +87,39 @@ const Carrousel = () => {
         },
         prevButton: {
             left: '0',
+            fontSize: '32px',
+            marginLeft: '15px',
+            color: '#ffffffff',
         },
         nextButton: {
             right: '0',
-        }
+            fontSize: '32px',
+            marginRight: '15px',
+            color: '#ffffffff',
+        },
     };
 
     const goToPreviousReward = () => {
-        setCurrentRewardIndex((prevIndex) => (prevIndex === 0 ? rewardsData.length - 1 : prevIndex - 1));
+        setCurrentRewardIndex(prevIndex => (prevIndex === 0 ? rewardsData.length - 1 : prevIndex - 1));
     };
 
     const goToNextReward = () => {
-        setCurrentRewardIndex((prevIndex) => (prevIndex === rewardsData.length - 1 ? 0 : prevIndex + 1));
+        setCurrentRewardIndex(prevIndex => (prevIndex === rewardsData.length - 1 ? 0 : prevIndex + 1));
     };
 
     return (
         <div style={styles.container}>
-            <button onClick={goToPreviousReward} style={{ ...styles.button, ...styles.prevButton }}>Anterior</button>
+            <button onClick={goToPreviousReward} style={{ ...styles.button, ...styles.prevButton }}>←</button>
             <div style={styles.innerContainer}>
                 <div style={styles.roundedBox}></div>
-                <div style={styles.title}>{rewardsData[currentRewardIndex].title}</div>
+                <div style={styles.title}>{rewardsData.length > 0 && rewardsData[currentRewardIndex].title}</div>
             </div>
-            <img style={styles.mainImage} src={rewardsData[currentRewardIndex].image} alt="Recompensas" />
-            <button onClick={goToNextReward} style={{ ...styles.button, ...styles.nextButton }}>Siguiente</button>
+            <img
+                style={styles.mainImage}
+                src={rewardsData.length > 0 && rewardsData[currentRewardIndex].image}
+                alt="Recompensas"
+            />
+            <button onClick={goToNextReward} style={{ ...styles.button, ...styles.nextButton }}>→</button>
         </div>
     );
 };

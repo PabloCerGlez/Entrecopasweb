@@ -1,67 +1,69 @@
 import React, { useState, useEffect } from 'react';
 
-// Importing components for the layout
+// Importando componentes para el diseño
 import Navbar from 'components/App/Navbar';
 import RegisterLogin from 'components/App/RegisterLogin';
 import Footer from 'components/App/Footer';
 
-// Importing images used in the layout
+// Importando imágenes utilizadas en el diseño
 import headerBackGround from "assets/images/headerBackGround.png";
 import headerBackGroundLarge from "assets/images/headerBackGroundLarge.png";
-// Ensure you have this image in the specified path
+// Asegúrate de tener estas imágenes en la ruta especificada
 
 /**
- * LayoutLoginRegister is a component responsible for rendering the layout of the login and registration pages.
+ * LayoutLoginRegister es un componente responsable de renderizar el diseño de las páginas de inicio de sesión y registro.
  */
 function LayoutLoginRegister() {
 
-  // State for storing the current window width
+  // Estado para almacenar el ancho de la ventana actual
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-  // Effect hook for listening to window resize events to update the window width state
+  // Efecto para escuchar eventos de cambio de tamaño de ventana y actualizar el estado del ancho de la ventana
   useEffect(() => {
 
-    // Function to update the window width state when window size changes
+    // Función para actualizar el estado del ancho de la ventana cuando cambia el tamaño de la ventana
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
     }
 
-    // Add an event listener to the window for resize events
+    // Agregar un event listener a la ventana para eventos de cambio de tamaño
     window.addEventListener('resize', handleResize);
 
-    // Cleanup: remove the event listener from the window when the component is unmounted
+    // Limpieza: eliminar el event listener de la ventana cuando se desmonta el componente
     return () => {
       window.removeEventListener('resize', handleResize);
     }
 
-  }, []); // The empty array dependency ensures this effect runs once when the component mounts and cleans up on unmount
+  }, []); // La dependencia de la matriz vacía asegura que este efecto se ejecute una vez cuando se monta el componente y se limpie en el desmontaje
 
-  // Styles for various elements in the component
+  // Estilos para varios elementos en el componente
   const styles = {
     body: {
       height: '100%',
       margin: 0,
       padding: 0,
-      background: '#F7F3EF', // Sets the background color of the app to a light beige
+      backgroundColor: '#ffffff', // Ajuste el color de fondo a blanco
+      color: '#C1A1A7',
+
     },
     container: {
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
-      height: '100%',
-      margin: '65px',
-      gap: '16px'
+      minHeight: '100vh', // Asegura que el contenedor ocupe al menos toda la altura de la ventana
+      padding: '0 20px', // Agrega margen a los lados del contenedor
+      boxSizing: 'border-box', // Asegura que el padding se incluya en el ancho total del contenedor
     },
   };
 
   return (
-    <div>
-      <Navbar/>
+    <div style={styles.body}>
+      <Navbar />
       <div style={styles.container}>
-        <RegisterLogin/>
+        <RegisterLogin />
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 }

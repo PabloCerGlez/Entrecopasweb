@@ -3,6 +3,12 @@ import SvgIconBackGround from 'assets/images/FooterBackGround.svg';
 import LogoFooter from 'assets/images/LogoFooter.svg';
 
 const CombinedFooter = () => {
+    const authToken = localStorage.getItem('authToken');
+
+    const redirectToProfile = () => {
+        window.location.href = '/perfill-code';
+    };
+
     const styles = {
         container: {
             width: '100%',
@@ -14,7 +20,6 @@ const CombinedFooter = () => {
             backgroundImage: `url(${SvgIconBackGround})`,
             backgroundSize: 'cover',
             backgroundPosition: 'top'
-            
         },
         footerContent: {
             display: 'flex',
@@ -47,7 +52,6 @@ const CombinedFooter = () => {
             height: '1px',
             margin:'15px',
             alignSelf: 'center',
-      
         },
         logo: {
             width: '99px',
@@ -69,12 +73,16 @@ const CombinedFooter = () => {
             </style>
             <div style={styles.container} className="tablet-footer">
                 <div style={styles.footerContent}>
-                    <img style={styles.logo}src={LogoFooter}  alt="Logo Placeholder" />
-                    <a href="/login" style={styles.linkText}>Iniciar sesión</a>
+                    <img style={styles.logo} src={LogoFooter} alt="Logo Placeholder" />
+                    {authToken ? (
+                        <a href="#" style={styles.linkText} onClick={redirectToProfile}>Perfil</a>
+                    ) : (
+                        <a href="/login" style={styles.linkText}>Iniciar sesión</a>
+                    )}
                     <a href="/centro-ayuda" style={styles.linkText}>Centro de ayuda</a>
                     <a href="/termino-y-condiciones" style={styles.linkText}>Términos y Condiciones</a>
                 </div>
-                <div style={styles.divider}> <hr></hr></div>
+                <div style={styles.divider}><hr /></div>
                 <div style={styles.copyrightText}>
                     Copyright © 2024 LOREM IPSUM DOLOR SIT AMET
                 </div>

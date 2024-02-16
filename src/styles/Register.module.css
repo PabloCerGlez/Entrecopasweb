@@ -6,3 +6,27 @@
     background-color: #602131;
     color: #FFFFFF;
 }
+
+body{
+    color: #602131;
+
+}
+#name{
+    color: #C1A1A7;
+}
+form{
+    color: #C1A1A7;
+
+}
+
+input {
+    color: #C1A1A7;
+  }
+
+  /* inputs.css */
+
+/* Estilos para el texto del placeholder en los elementos input */
+::placeholder {
+    color: #C1A1A7; /* Color del texto del placeholder */
+  }
+  

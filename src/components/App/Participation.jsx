@@ -18,7 +18,8 @@ const styles = {
         justifyContent: 'center',
         height: '100%',
         margin: '45px auto',
-        gap: '16px'
+        gap: '16px',
+       
     },
     section: {
         display: 'flex',
@@ -81,7 +82,7 @@ const Participation = () => {
     const [data, setData] = useState(null);
 
     useEffect(() => {
-        fetch('http://167.172.120.46/api/view-home', {
+        fetch('http://entrecopas.randominteractive.site/api/view-home', {
             method: 'GET',
             headers: {
                 'Cookie': 'XSRF-TOKEN=...; entre_copas_session=...'
@@ -99,7 +100,7 @@ const Participation = () => {
 
     const steps = data.como_participar.steps.map((step, index) => (
         <div key={index} style={styles.section}>
-            <img width="78" height="60" src={`http://167.172.120.46/${step.icon_url}`} alt={`Section ${index + 1}`} />
+            <img width="78" height="60" src={`http://entrecopas.randominteractive.site/${step.icon_url}`} alt={`Section ${index + 1}`} />
             <div>
                 <div style={{ ...styles.textStyles, ...styles.sectionTitle }}>{step.title}</div>
                 <div style={{ ...styles.textStyles, ...styles.sectionDesc }}>{step.description}</div>
@@ -109,10 +110,9 @@ const Participation = () => {
 
     return (
         <div id="section-below" style={styles.container}>
-            <img width="26" height="26" src={iconHelpParticipation} alt="Placeholder" />
             <div style={styles.header}>{data.como_participar.title}</div>
             {steps}
-            <button style={styles.startButton}>botón</button>
+            <button style={styles.startButton}>Comenzar</button>
         </div>
     );
 };
